@@ -2,6 +2,20 @@
 
 Machine learning pipeline for predicting PM2.5 air quality across Polish monitoring stations (2016–2019), combining air quality measurements from the Chief Inspectorate of Environmental Protection (GIOŚ), meteorological data from the Open-Meteo archive API, and geospatial features from OpenStreetMap (OSMnx) and Copernicus GHSL satellite rasters.
 
+## 💡 Inspiration & Background
+
+This project was inspired by recent research on air quality modeling in Poland:
+> **Vovk, T., Kryza, M., & Werner, M. (2024).** *Using random forest to improve EMEP4PL model estimates of daily PM2.5 in Poland.* Atmospheric Environment, 332, 120615. [https://doi.org/10.1016/j.atmosenv.2024.120615](https://doi.org/10.1016/j.atmosenv.2024.120615)
+
+**How this project differs:**
+While the original paper focuses on a **hybrid approach** (using ML to correct bias in the EMEP4PL physical-chemical model), this pipeline implements a **Direct ML approach**. It predicts concentrations directly from raw meteorological and spatial data, making it more lightweight and independent of large-scale CTM (Chemical Transport Models) simulations.
+
+## 🚀 Key Features
+- **End-to-End Pipeline:** From raw GIOŚ archives and API calls to trained models.
+- **Advanced Feature Engineering:** Automated extraction of road density and building counts via `OSMnx` and population data from `Copernicus GHSL` rasters.
+- **Temporal & Spatial Validation:** Models are tested not only on unseen time periods but also on **unseen monitoring stations** to evaluate geographical generalization.
+- **Hybrid Modeling:** Comparison between classical Gradient Boosting (XGBoost, LightGBM) and Deep Learning (LSTM) for time-series forecasting.
+
 ## Dataset
 
 - **45 monitoring stations** across Poland, filtered for completeness (≥3 years with ≥12 months each having ≥14 valid days)
